@@ -1,0 +1,18 @@
+import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { submitInquiry } from "@/lib/agency.functions";
+import { pageMeta } from "@/lib/seo";
+
+export const Route = createFileRoute("/contact")({
+  head: () => pageMeta("Start a project", "Tell TENURE AI about your AI automation, software, SaaS, API, or dashboard project."),
+  component: Contact,
+});
+
+function Contact(){const submit=useServerFn(submitInquiry);const [busy,setBusy]=useState(false);const [message,setMessage]=useState("");async function send(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setBusy(true);setMessage("");const fd=new FormData(e.currentTarget);try{await submit({data:{name:String(fd.get("name")??""),email:String(fd.get("email")??""),company:String(fd.get("company")??""),service:String(fd.get("service")??"") as "AI Automation",budget:String(fd.get("budget")??""),message:String(fd.get("message")??"")}});setMessage("Thanks — your brief is with us. We’ll be in touch soon.");e.currentTarget.reset()}catch(error){setMessage(error instanceof Error?error.message:"We couldn't send your message.")}finally{setBusy(false)}}return <section className="mx-auto grid max-w-7xl gap-12 px-5 py-20 md:grid-cols-[.8fr_1.2fr] lg:px-8 lg:py-28"><div><p className="text-xs font-bold uppercase text-accent">Start a project</p><h1 className="mt-4 font-display text-6xl font-semibold leading-none">What should work better?</h1><p className="mt-6 max-w-md text-lg leading-8 text-muted-foreground">Share the opportunity, bottleneck, or product you have in mind. We’ll respond with useful next steps—not a generic sales deck.</p><div className="mt-12 border-t border-border pt-6 text-sm"><p className="font-bold">Good starting points</p><p className="mt-2 text-muted-foreground">A recurring workflow, a product idea, a disconnected system, or a decision that takes too long.</p></div></div><form onSubmit={send} className="space-y-5 rounded-md border border-border bg-card p-5 sm:p-8"><div className="grid gap-5 sm:grid-cols-2"><Field label="Name" name="name" required minLength={2} maxLength={80}/><Field label="Work email" name="email" type="email" required maxLength={160}/><Field label="Company" name="company" maxLength={120}/><div><Label htmlFor="service">What can we help with?</Label><select id="service" name="service" className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3" defaultValue="AI Automation"><option>AI Automation</option><option>AI Agents</option><option>Full-Stack Development</option><option>SaaS & APIs</option><option>Dashboards</option><option>Not sure yet</option></select></div></div><Field label="Indicative budget" name="budget" maxLength={60} placeholder="Optional"/><div><Label htmlFor="message">Tell us about the opportunity</Label><Textarea id="message" name="message" required minLength={20} maxLength={3000} className="mt-2 min-h-40"/></div><Button size="lg" disabled={busy}>{busy&&<Loader2 className="animate-spin"/>}Send project brief</Button>{message&&<p className="rounded-md bg-muted p-3 text-sm" role="status">{message}</p>}</form></section>}
+function Field({label,name,...props}:{label:string;name:string}&React.ComponentProps<typeof Input>){return <div><Label htmlFor={name}>{label}</Label><Input id={name} name={name} className="mt-2 h-11" {...props}/></div>}
