@@ -1,0 +1,9 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { pageMeta } from "@/lib/seo";
+
+export const Route = createFileRoute("/about")({
+  head: () => pageMeta("About", "TENURE AI is a senior AI and software studio focused on useful, durable systems."),
+  component: () => (
+    <div><section className="border-b border-border"><div className="mx-auto max-w-7xl px-5 py-24 lg:px-8"><p className="text-xs font-bold uppercase text-accent">About TENURE AI</p><h1 className="mt-5 max-w-4xl font-display text-6xl font-semibold leading-[.95] sm:text-7xl">Technology should earn its place in the work.</h1></div></section><section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 md:grid-cols-2 lg:px-8"><h2 className="font-display text-4xl font-semibold">Built for the distance between a promising idea and a dependable system.</h2><div className="space-y-6 text-lg leading-8 text-muted-foreground"><p>We help teams turn complex opportunities into clear, useful products and operations. That means starting with how people work—not with a fashionable technology.</p><p>Our approach brings strategy, product thinking, design, AI, and software engineering into one accountable team. The result is faster learning, fewer handoffs, and systems your team can confidently own.</p></div></section><section className="bg-secondary"><div className="mx-auto grid max-w-7xl gap-px py-px sm:grid-cols-3">{[["Clarity","Plain language, visible tradeoffs, and decisions tied to outcomes."],["Craft","Thoughtful experiences and engineering that holds up under real use."],["Stewardship","Security, maintainability, and responsible AI from the beginning."]].map(([t,d])=><div key={t} className="bg-background p-8"><h3 className="text-2xl font-bold">{t}</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">{d}</p></div>)}</div></section></div>
+  ),
+});
