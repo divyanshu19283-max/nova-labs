@@ -1,23 +1,45 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Braces, Bot, Workflow, PanelsTopLeft, Database, Gauge } from "lucide-react";
+import { ArrowRight, Bot, Braces, Database, Gauge, Network, Orbit, ShieldCheck, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { pageMeta } from "@/lib/seo";
-import studio from "@/assets/tenure-studio.jpg";
+import coreVisual from "@/assets/tenure-ai-core.jpg";
 
 export const Route = createFileRoute("/")({
-  head: () => pageMeta("AI + software agency", "TENURE AI designs and builds AI automation, agents, SaaS platforms, APIs, and dashboards."),
+  head: () => pageMeta("AI systems engineered for impact", "TENURE AI designs and builds advanced AI automation, agents, digital products, and data infrastructure."),
   component: Index,
 });
 
+const capabilities = [
+  [Workflow, "AI Automation", "Operational systems that remove repetition and increase throughput."],
+  [Bot, "AI Agents", "Grounded, observable agents built for consequential work."],
+  [Braces, "Product Engineering", "High-performance applications from strategy to production."],
+  [Database, "Data & APIs", "Connected foundations that make intelligence usable everywhere."],
+  [Network, "SaaS Platforms", "Secure, scalable products with clear operating logic."],
+  [Gauge, "Modernization", "Legacy systems rebuilt for speed, clarity, and intelligence."],
+] as const;
+
 function Index() {
-  return (
-    <div>
-      <section className="paper-grain border-b border-border"><div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-10 px-5 py-14 md:grid-cols-[1.08fr_.92fr] lg:px-8">
-        <div className="relative z-10"><p className="mb-5 text-xs font-bold uppercase text-accent">AI + Software Studio</p><h1 className="max-w-3xl font-display text-6xl leading-[.9] font-semibold sm:text-7xl lg:text-8xl">Intelligence,<br/><em className="font-medium text-accent">made useful.</em></h1><p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">We design and build AI systems and digital products that remove friction, sharpen decisions, and create durable advantage.</p><div className="mt-8 flex flex-wrap gap-3"><Button size="lg" asChild><Link to="/contact">Start a Project <ArrowRight/></Link></Button><Button size="lg" variant="outline" asChild><Link to="/case-studies">See Our Work</Link></Button></div></div>
-        <div className="relative h-[46vh] min-h-96 overflow-hidden rounded-md md:h-[72vh]"><img src={studio} alt="A warm, considered studio workspace" className="size-full object-cover"/><div className="absolute bottom-0 left-0 bg-background px-4 py-3 text-xs font-semibold uppercase">Strategy · Design · Engineering</div></div>
-      </div></section>
-      <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8"><div className="mb-14 grid gap-5 md:grid-cols-2"><h2 className="font-display text-5xl font-semibold">Six capabilities.<br/>One accountable team.</h2><p className="max-w-lg text-muted-foreground md:justify-self-end">From operating model to production code, we connect strategy, experience, data, and engineering.</p></div><div className="grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-3">{[[Workflow,"AI Automation"],[Bot,"AI Agents"],[Braces,"Full-Stack Development"],[Database,"SaaS & APIs"],[PanelsTopLeft,"Dashboards"],[Gauge,"Product Modernization"]].map(([Icon,title],i) => { const I=Icon as typeof Workflow; return <Link key={title as string} to="/services" className="group min-h-52 border-b border-r border-border p-6 transition-colors hover:bg-secondary"><span className="text-xs text-muted-foreground">0{i+1}</span><I className="mt-10 size-6 text-accent"/><h3 className="mt-4 text-2xl font-semibold">{title as string}</h3><ArrowRight className="mt-5 transition-transform group-hover:translate-x-1"/></Link>})}</div></section>
-      <section className="bg-secondary"><div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 md:grid-cols-[.7fr_1.3fr] lg:px-8"><p className="text-xs font-bold uppercase text-accent">How we work</p><div><h2 className="font-display text-5xl font-semibold">Small senior teams.<br/>Clear business outcomes.</h2><div className="mt-10 divide-y divide-border">{[["01","Find the leverage","We begin with the workflow, decision, or customer moment that matters most."],["02","Prove the system","A focused first phase makes the value and technical path tangible."],["03","Build for tenure","We engineer for real users, safe operations, and confident ownership."]].map(([n,t,d])=><div key={n} className="grid gap-3 py-6 sm:grid-cols-[3rem_1fr_1.4fr]"><span className="text-sm text-accent">{n}</span><h3 className="text-lg font-bold">{t}</h3><p className="text-sm leading-6 text-muted-foreground">{d}</p></div>)}</div></div></div></section>
-    </div>
-  );
+  return <div className="overflow-hidden">
+    <section className="relative min-h-[calc(100vh-72px)] border-b border-border">
+      <img src={coreVisual} width={1536} height={1024} alt="Luminous AI network architecture" className="absolute inset-0 size-full object-cover object-[66%_center] opacity-70" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--background)_4%,color-mix(in_oklab,var(--background)_92%,transparent)_44%,color-mix(in_oklab,var(--background)_26%,transparent)_100%)]" />
+      <div className="relative mx-auto flex min-h-[calc(100vh-72px)] max-w-7xl items-center px-5 py-20 lg:px-8">
+        <div className="max-w-4xl animate-fade-in">
+          <div className="mb-7 flex items-center gap-3 font-mono text-[11px] uppercase text-accent"><span className="size-2 animate-pulse bg-accent cyan-glow"/>AI engineering studio <span className="h-px w-16 bg-accent/50"/></div>
+          <h1 className="max-w-4xl text-6xl font-semibold leading-[.92] sm:text-7xl lg:text-8xl xl:text-9xl">Intelligence,<br/><span className="text-accent">engineered.</span></h1>
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">We design and build AI systems that transform complex operations into durable competitive advantage.</p>
+          <div className="mt-9 flex flex-wrap gap-3"><Button size="lg" asChild><Link to="/contact">Initiate a project <ArrowRight/></Link></Button><Button size="lg" variant="outline" asChild><Link to="/services">Explore capabilities</Link></Button></div>
+          <div className="mt-14 grid max-w-2xl grid-cols-3 border-y border-border py-5 font-mono text-[10px] uppercase text-muted-foreground"><span>Strategy_01</span><span>Systems_02</span><span>Scale_03</span></div>
+        </div>
+      </div>
+      <div className="absolute bottom-8 right-8 hidden items-center gap-3 font-mono text-[10px] uppercase text-accent lg:flex"><Orbit className="size-4 animate-spin [animation-duration:8s]"/> Core online / 2026</div>
+    </section>
+
+    <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+      <div className="mb-14 grid gap-8 md:grid-cols-[.8fr_1.2fr]"><p className="font-mono text-xs uppercase text-accent">[ Capabilities ]</p><div><h2 className="text-4xl font-semibold leading-tight sm:text-6xl">From hard problems to<br/><span className="text-muted-foreground">production systems.</span></h2><p className="mt-6 max-w-xl leading-7 text-muted-foreground">One senior team connects intelligence, product, data, and engineering—without the handoff tax.</p></div></div>
+      <div className="grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-3">{capabilities.map(([Icon,title,text],i)=><Link key={title} to="/services" className="group min-h-64 border-b border-r border-border bg-card/35 p-6 transition-all duration-300 hover:bg-cyan-soft"><div className="flex items-center justify-between"><span className="font-mono text-[10px] text-muted-foreground">SYS_0{i+1}</span><ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent"/></div><Icon className="mt-12 size-7 text-accent"/><h3 className="mt-5 text-xl font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p></Link>)}</div>
+    </section>
+
+    <section className="border-y border-border bg-secondary/50"><div className="mx-auto grid max-w-7xl gap-16 px-5 py-24 lg:grid-cols-[.8fr_1.2fr] lg:px-8 lg:py-32"><div><p className="font-mono text-xs uppercase text-accent">[ Operating model ]</p><h2 className="mt-6 text-4xl font-semibold leading-tight sm:text-5xl">Precision at every layer.</h2><div className="mt-8 flex items-center gap-3 text-xs text-muted-foreground"><ShieldCheck className="size-5 text-accent"/> Security and governance by design</div></div><div className="divide-y divide-border border-y border-border">{[["01","Find the leverage","Map the critical workflow, decision, or customer moment."],["02","Prove the system","Make value and technical feasibility tangible in a focused first phase."],["03","Engineer for tenure","Build for real users, safe operations, and confident ownership."]].map(([n,t,d])=><div key={n} className="grid gap-4 py-7 sm:grid-cols-[3rem_1fr_1.3fr]"><span className="font-mono text-xs text-accent">{n}</span><h3 className="font-semibold">{t}</h3><p className="text-sm leading-6 text-muted-foreground">{d}</p></div>)}</div></div></section>
+  </div>;
 }
